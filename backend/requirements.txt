@@ -1,0 +1,23 @@
+# --- web framework ---
+fastapi
+uvicorn[standard]
+
+# --- persistence (SQL) ---
+sqlalchemy>=2.0
+
+# --- config / auth / payments ---
+pydantic>=2.0
+python-dotenv
+PyJWT
+stripe
+
+# --- generation pipeline (vendored from dreamers-ai) ---
+google-genai>=1.0.0
+imageio>=2.34
+imageio-ffmpeg            # bundles an ffmpeg binary (mock clips, fades, stitch)
+av                        # pyav backend for last-frame extraction
+pillow
+
+# --- testing ---
+pytest
+httpx                     # TestClient transport

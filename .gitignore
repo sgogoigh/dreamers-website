@@ -2,6 +2,7 @@
 __pycache__/
 *.py[codz]
 *$py.class
+pytest.ini
 
 # C extensions
 *.so
@@ -149,6 +150,7 @@ activemq-data/
 
 # Environments
 .env
+.env.example
 .envrc
 .venv
 env/
@@ -216,3 +218,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Planning & Running
+run.ps1
+TODO.md
