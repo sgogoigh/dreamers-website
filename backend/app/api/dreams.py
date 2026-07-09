@@ -214,6 +214,7 @@ def delete_dream(
     job = _get_job(db, dream.id)
     if job is not None:
         db.delete(job)
+        db.flush()  # delete the job before the dream so the FK cascade can't race it
     db.delete(dream)
     db.commit()
     storage.delete_artifacts(dream.id)

@@ -1,0 +1,166 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Dreamers theme — dark only, "last sunset" palette.
+   Deep plum night → royal purple → magenta → amber horizon glow.
+--------------------------------------------------------------------------- */
+@theme {
+  --color-night: #0b0713;
+  --color-abyss: #070410;
+  --color-plum: #171022;
+  --color-panel: #1d1430;
+  --color-panel-2: #251a3a;
+  --color-chat: #221934; /* the lighter warm hue of the chat pane */
+  --color-line: #342647;
+
+  --color-sunset-violet: #7c3aed;
+  --color-sunset-magenta: #d946a0;
+  --color-sunset-amber: #f59e0b;
+  --color-sunset-gold: #ffd9a0;
+
+  --color-star: #f4efe6;
+  --color-star-dim: #b7a9c9;
+  --color-star-faint: #7f7194;
+
+  --color-ok: #34d399;
+  --color-bad: #f87171;
+
+  --font-display: var(--font-fraunces), "Georgia", serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+
+  --shadow-glow: 0 0 40px rgba(217, 70, 160, 0.25), 0 0 80px rgba(124, 58, 237, 0.15);
+  --shadow-glow-sm: 0 0 18px rgba(245, 158, 11, 0.28);
+
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-slow: float 11s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 3.2s ease-in-out infinite;
+  --animate-shimmer: shimmer 2.2s linear infinite;
+  --animate-drift: drift 24s ease-in-out infinite alternate;
+  --animate-twinkle: twinkle 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-14px) rotate(1.5deg); }
+}
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 24px rgba(217, 70, 160, 0.25), 0 0 60px rgba(124, 58, 237, 0.12); }
+  50% { box-shadow: 0 0 42px rgba(245, 158, 11, 0.35), 0 0 90px rgba(217, 70, 160, 0.22); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+@keyframes drift {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(6%, -4%) scale(1.12); }
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes marquee-right {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+/* --- base ------------------------------------------------------------------ */
+html {
+  color-scheme: dark;
+  background: var(--color-night);
+}
+body {
+  background: var(--color-night);
+  color: var(--color-star);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  min-height: 100dvh;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(217, 70, 160, 0.4);
+  color: var(--color-star);
+}
+
+/* --- sleek scrollbar --------------------------------------------------------- */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(217, 70, 160, 0.5) transparent;
+}
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--color-sunset-violet), var(--color-sunset-magenta), var(--color-sunset-amber));
+  border: 2px solid var(--color-night);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #9a63f5, #ef6cb7, #ffb84d);
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* --- utilities ------------------------------------------------------------------ */
+.text-gradient {
+  background: linear-gradient(92deg, var(--color-sunset-gold) 0%, var(--color-sunset-amber) 28%, var(--color-sunset-magenta) 62%, var(--color-sunset-violet) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.text-gradient-soft {
+  background: linear-gradient(92deg, #ffe9c9, #f4b8dd 55%, #c9a6ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.bg-sunset {
+  background: linear-gradient(92deg, var(--color-sunset-violet), var(--color-sunset-magenta) 55%, var(--color-sunset-amber));
+}
+.border-gradient {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--color-panel), var(--color-panel)) padding-box,
+    linear-gradient(120deg, rgba(124, 58, 237, 0.6), rgba(217, 70, 160, 0.5), rgba(245, 158, 11, 0.6)) border-box;
+}
+.grain::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.shimmer {
+  background: linear-gradient(100deg, transparent 30%, rgba(255, 217, 160, 0.14) 50%, transparent 70%);
+  background-size: 200% 100%;
+  animation: shimmer 2.2s linear infinite;
+}
+
+.focus-sunset:focus-visible {
+  outline: 2px solid var(--color-sunset-amber);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* --- reduced motion --------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
